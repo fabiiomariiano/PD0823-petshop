@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from base.forms import ContatoForm, ReservaForm
+from base.models import Contato
 
 # Create your views here.
 def inicio(request):
@@ -15,6 +16,7 @@ def contato(request):
     form = ContatoForm(request.POST)
     if form.is_valid():
       sucesso = True
+      form.save()
 
   context = {
     'nome': 'Fabio Mariano',
@@ -35,6 +37,7 @@ def reserva(request):
     form = ReservaForm(request.POST)
     if form.is_valid():
       sucesso = True
+      form.save()
 
   context = {
     'nome': 'Fabio Mariano',

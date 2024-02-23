@@ -1,12 +1,15 @@
 from django import forms
+from base.models import Contato, Reserva
 
-class ContatoForm(forms.Form):
-  nome = forms.CharField()
-  email = forms.EmailField()
-  mensagem = forms.CharField(widget=forms.Textarea)
+class ContatoForm(forms.ModelForm):
+  class Meta:
+    model = Contato
+    fields = ['nome', 'email', 'mensagem']
 
-class ReservaForm(forms.Form):
-  nomeDoPet = forms.CharField(label="Nome do PET")
-  telefone = forms.CharField()
-  dia = forms.DateField(label="Dia da Reserva", widget=forms.widgets.DateInput(attrs={'type': 'date'}))
-  observacoes = forms.CharField(widget=forms.Textarea, label="Observações")
+class ReservaForm(forms.ModelForm):
+  class Meta:
+    model = Reserva
+    fields = ['nomeDoPet', 'telefone', 'dia', 'observacoes']
+    widgets = {
+      'dia' : forms.DateInput(attrs={'type': 'date'})
+    }
